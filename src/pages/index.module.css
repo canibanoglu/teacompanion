@@ -16,9 +16,21 @@
   justify-content: space-between;
 }
 
+@media (max-width: 40rem) {
+  .selectorsContainer {
+    display: block;
+  }
+
+  .teaSelector {
+    margin-bottom: 1rem;
+  }
+}
+
 .teaSelector {
   background-color: rgb(60, 67, 94);
+  -webkit-appearance: none;
   color: rgb(166, 172, 205);
+  font-size: 1rem;
 }
 
 .switchContainer {
