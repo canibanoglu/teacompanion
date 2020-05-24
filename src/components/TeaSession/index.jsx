@@ -38,6 +38,12 @@ export default class TeaSession extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({ currentInfusion: 0 })
+    }
+  }
+
   render() {
     const { currentInfusion } = this.state;
     const { infusions,
