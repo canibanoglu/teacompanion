@@ -65,6 +65,7 @@ export default class TeaSession extends React.Component {
           {
             infusions.map((time, index) => (
               <InfusionBox
+                key={index}
                 time={time}
                 index={index}
                 done={index < currentInfusion}
@@ -75,6 +76,7 @@ export default class TeaSession extends React.Component {
             currentInfusion >= infusions.length && (
               (new Array(currentInfusion - infusions.length + 1).fill(0)).map((_, i) => (
                 <InfusionBox
+                  key={infusions.length + i}
                   time={last(infusions) + (i + 1) * defaultTimeIncrement}
                   index={infusions.length + i}
                   extra

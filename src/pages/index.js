@@ -10,14 +10,6 @@ import Switch from '../components/Switch';
 import styles from './index.module.css';
 
 
-const DANCONG_HUANG_PIAN = {
-  infusions: [15, 15, 30, 30, 30, 45, 60],
-  name: 'Dancong Huang Pian',
-  waterTemp: 90,
-  defaultTimeIncrement: 15,
-  amount: '3',
-};
-
 class IndexPage extends React.Component {
   state = {
     western: false,
@@ -33,6 +25,17 @@ class IndexPage extends React.Component {
       selectedTea: this.teas.find(x => x.name === e.target.value)
     })
   }
+
+  handleBrewMethodSelect = e => {
+    this.setState({
+      western: e.target.checked
+    }, () => {
+      this.setState({
+        selectedTea: this.teas.find(x => x.name === this.state.selectedTea.name)
+      })
+    })
+  }
+
   render() {
     return (
       <Layout>
@@ -40,17 +43,17 @@ class IndexPage extends React.Component {
           <Page>
             <div className={styles.selectorsContainer}>
               <div>
-                <label for='teas'>Tea Types:</label>
+                <label htmlFor='teas'>Tea Types:</label>
                 <select name='teas' onChange={this.handleTeaSelect}>
                   {
                     this.teas.map(tea => (
-                      <option value={tea.name}>{tea.name}</option>
+                      <option key={tea.name} value={tea.name}>{tea.name}</option>
                     ))
                   }
                 </select>
               </div>
               <div className={styles.switchContainer}>
-                Gong Fu &nbsp;<Switch /> &nbsp;  Western
+                Gong Fu &nbsp;<Switch onChange={this.handleBrewMethodSelect} value={this.state.western} /> &nbsp;  Western
               </div>
             </div>
 
@@ -60,13 +63,13 @@ class IndexPage extends React.Component {
 
             <div className={styles.credits}>
               <p>
-                Original content can be found <a className={styles.link} href="https://meileaf.com/resources/pdf/mei-leaf-tea-brewing-guide.pdf" target="_blank">here</a>
+                Original content can be found <a className={styles.link} rel="noreferrer" href="https://meileaf.com/resources/pdf/mei-leaf-tea-brewing-guide.pdf" target="_blank">here</a>
               </p>
               <p>
-                Made with {'<3'} and tea by <a className={styles.link} href="https://can.ibanog.lu" target="_blank">me</a>. 
+                Made with {'<3'} and tea by <a className={styles.link} rel="noreferrer" href="https://can.ibanog.lu" target="_blank">me</a>. 
               </p>
               <p>
-                Bug reports, feature requests should all go <a className={styles.link} href="https://www.github.com/canibanoglu/teacompanion" target="_blank">here</a>
+                Bug reports, feature requests should all go <a className={styles.link} rel="noreferrer" href="https://www.github.com/canibanoglu/teacompanion" target="_blank">here</a>
               </p>
             </div>
 
