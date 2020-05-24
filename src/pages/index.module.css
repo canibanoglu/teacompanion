@@ -16,6 +16,11 @@
   justify-content: space-between;
 }
 
+.teaSelector {
+  background-color: rgb(60, 67, 94);
+  color: rgb(166, 172, 205);
+}
+
 .switchContainer {
   display: flex;
   align-items: center;

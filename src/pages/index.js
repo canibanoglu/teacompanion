@@ -43,8 +43,8 @@ class IndexPage extends React.Component {
           <Page>
             <div className={styles.selectorsContainer}>
               <div>
-                <label htmlFor='teas'>Tea Types:</label>
-                <select name='teas' onChange={this.handleTeaSelect}>
+                <label htmlFor='teas'>Tea Types: &nbsp;</label>
+                <select name='teas' onChange={this.handleTeaSelect} className={styles.teaSelector}>
                   {
                     this.teas.map(tea => (
                       <option key={tea.name} value={tea.name}>{tea.name}</option>
