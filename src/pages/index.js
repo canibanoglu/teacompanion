@@ -39,7 +39,7 @@ class IndexPage extends React.Component {
   render() {
     return (
       <Layout>
-          <SEO title={'Home'}/>
+          <SEO title={"Can's Tea Companion"}/>
           <Page>
             <div className={styles.selectorsContainer}>
               <div>

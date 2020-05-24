@@ -1,15 +1,15 @@
 module.exports = {
     siteMetadata: {
-        title: 'Gatsby Starter Redux Storybook',
-        description: 'Everything you need to get started',
-        author: 'Fabian Unger',
+        title: 'Can\'s Tea Companion',
+        description: 'A small app to keep track of infusions and time them',
+        author: 'Can Ibanoglu',
     },
     plugins: [
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                name: 'Gatsby Starter Redux + Storybook',
-                short_name: 'Gatsby Starter Redux + Storybook',
+                name: 'Can\'s Tea Companion',
+                short_name: 'Can\'s Tea Companion',
                 start_url: '/',
                 background_color: '#ffffff',
                 theme_color: '#744C9E',
