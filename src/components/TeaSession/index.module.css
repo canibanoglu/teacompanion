@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infusions {
+  display: flex;
+  flex-wrap: wrap;
+  width: 11rem;
+}
+
+.text {
+  line-height: 1.25rem;
+}
+
+.text:last-of-type {
+  margin-bottom: 1rem;
+}
+
+
