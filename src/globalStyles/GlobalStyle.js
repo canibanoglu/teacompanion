@@ -7,5 +7,7 @@ export default createGlobalStyle`
   body {
     font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', sans-serif;
     font-weight: 500;
+    background-color: #292d3e;
+    color: rgb(166, 172, 205);
   }
 `;

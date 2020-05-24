@@ -1,0 +1,22 @@
+.credits {
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1rem;
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  font-size: 0.9rem;
+}
+
+.selectorsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.switchContainer {
+  display: flex;
+  align-items: center;
+}

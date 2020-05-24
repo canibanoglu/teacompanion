@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CountdownTimer from '../Countdown';
 import InfusionBox from '../InfusionBox';
 
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 function last(arr) {
   return arr[arr.length - 1];
