@@ -57,6 +57,9 @@ export default class Countdown extends React.Component {
   handleStartStop = () => {
     const { running } = this.state;
 
+    this.audio.current.play();
+    this.audio.current.pause();
+    this.audio.current.currentTime = 0;
     if (!running) {
       this.start();
       return;
