@@ -71,6 +71,20 @@ const values = [
     ],
     defaultTimeIncrement: 5,
     notes: '',
+  },
+
+  // Extras here for now move them away
+  {
+    name: 'Yiwu 2014 (Gushu)',
+    waterTemp: 100,
+    amount: 5,
+    infusions: [
+      2, 3, 4, 5, 6,
+      7, 8, 9, 10, 11,
+      12, 13, 14, 15, 15
+    ],
+    defaultTimeIncrement: 0,
+    notes: '',
   }
 ];
 

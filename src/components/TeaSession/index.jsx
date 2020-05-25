@@ -67,6 +67,7 @@ export default class TeaSession extends React.Component {
         <p className={styles.text}>{name}</p>
         <p className={styles.text}>Water Temperature: {waterTemp} °C</p>
         <p className={styles.text}>Amount: {amount} gr / 100 ml</p>
+        <h3 className={styles.header}>Infusion Counter</h3>
         <div className={styles.infusions}>
           {
             infusions.map((time, index) => (
