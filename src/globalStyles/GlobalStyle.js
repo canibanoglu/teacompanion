@@ -10,4 +10,9 @@ export default createGlobalStyle`
     background-color: #292d3e;
     color: rgb(166, 172, 205);
   }
+
+  #gatsby-focus-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 `;

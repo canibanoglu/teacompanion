@@ -79,7 +79,7 @@ export default class Countdown extends React.Component {
     return (
       <div className={styles.container}>
         <p className={styles.timerText}>
-          { remaining }
+          { remaining }  sec.
         </p>
         <div>
           <button className={styles.button} onClick={this.handleReset}>
