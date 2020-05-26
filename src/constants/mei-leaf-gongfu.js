@@ -90,7 +90,7 @@ const values = [
     name: 'Bai Hao Yin Zhen 2017 (Superior)',
     waterTemp: 90,
     amount: '3',
-    infusiongs: [45, 45, 60, 90],
+    infusions: [45, 45, 60, 90],
     defaultTimeIncrement: 30,
     notes: '',
   }
