@@ -15,6 +15,11 @@
 
 .timerButton {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  text-align: center;
   font-size: 1.25rem;
 }
 
