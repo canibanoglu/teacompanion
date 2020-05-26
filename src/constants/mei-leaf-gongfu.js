@@ -93,6 +93,14 @@ const values = [
     infusions: [45, 45, 60, 90],
     defaultTimeIncrement: 30,
     notes: '',
+  },
+  {
+    name: 'Xingren Xiang',
+    waterTemp: 90,
+    amount: '3',
+    infusions: [45, 60, 60, 90],
+    defaultTimeIncrement: 30,
+    notes: '',
   }
 ];
 
