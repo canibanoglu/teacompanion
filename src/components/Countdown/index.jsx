@@ -6,6 +6,7 @@ export default class Countdown extends React.Component {
   state = {
     remaining: this.props.from,
     running: false,
+    startTime: null,
   }
 
   constructor(props) {
@@ -32,8 +33,11 @@ export default class Countdown extends React.Component {
         running: remaining > 1
       }, () => {
         if (this.state.remaining === 0) {
+          const elapsedTime = Math.ceil(
+            (Date.now() - this.state.startTime) / 1000
+          );
           this.handleReset();
-          this.props.onFinish();
+          this.props.onFinish(elapsedTime);
           this.audio.current.play();
         }
       })
@@ -50,7 +54,8 @@ export default class Countdown extends React.Component {
 
   start = () => {
     this.setState({
-      running: true
+      running: true,
+      startTime: Date.now()
     }, this.tick);
   }
 
@@ -69,14 +74,17 @@ export default class Countdown extends React.Component {
 
   handleReset = () => {
     this.stop(() => {
-      this.setState({ remaining: this.props.from })
+      this.setState({
+        remaining: this.props.from,
+        startTime: null,
+      })
     });
   }
 
   get stepSize() {
 
   const { remaining } = this.state;
-  return remaining < 30 ? 
+  return remaining < 30 ?
     1 : remaining < 90 ?
       5 : remaining < 120 ?
         10 : 15;

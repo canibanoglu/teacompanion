@@ -27,26 +27,27 @@ export default class TeaSession extends React.Component {
   };
 
   state = {
-    currentInfusion: 0,
+    completedInfusions: [],
   };
 
-  onTimerEnd = () => {
-    const { currentInfusion } = this.state;
+  onTimerEnd = (elapsedTime) => {
+    const { completedInfusions } = this.state;
 
     this.setState({
-      currentInfusion: currentInfusion + 1
+      completedInfusions: [...completedInfusions, elapsedTime],
     })
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      this.setState({ currentInfusion: 0 })
+      this.setState({ completedInfusions: [] })
     }
   }
 
   render() {
-    const { currentInfusion } = this.state;
-    const { infusions,
+    const { completedInfusions } = this.state;
+    const {
+      infusions,
       notes,
       defaultTimeIncrement,
       amount,
@@ -54,6 +55,7 @@ export default class TeaSession extends React.Component {
       name
     } = this.props;
 
+    const currentInfusion = completedInfusions.length;
     const infusionTime = currentInfusion < infusions.length ?
       infusions[currentInfusion] :
       last(infusions) + (currentInfusion - infusions.length + 1) * defaultTimeIncrement;
@@ -73,7 +75,7 @@ export default class TeaSession extends React.Component {
             infusions.map((time, index) => (
               <InfusionBox
                 key={index}
-                time={time}
+                time={index < currentInfusion ? completedInfusions[index] : time}
                 index={index}
                 done={index < currentInfusion}
               />
