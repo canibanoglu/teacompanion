@@ -101,6 +101,14 @@ const values = [
     infusions: [45, 60, 60, 90],
     defaultTimeIncrement: 30,
     notes: '',
+  },
+  {
+    name: 'Nannuoshan 2013 - Gushu - Mao Cha',
+    waterTemp: 100,
+    amount: '6',
+    infusions: [5, 7, 9, 11, 13, 15, 20],
+    defaultTimeIncrement: 0,
+    notes: '',
   }
 ];
 
