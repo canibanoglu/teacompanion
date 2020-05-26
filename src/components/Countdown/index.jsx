@@ -73,14 +73,35 @@ export default class Countdown extends React.Component {
     });
   }
 
+  get stepSize() {
+
+  const { remaining } = this.state;
+  return remaining < 30 ? 
+    1 : remaining < 90 ?
+      5 : remaining < 120 ?
+        10 : 15;
+  };
+
+  incrementRemainingTime = () => {
+    this.setState({ remaining: this.state.remaining + this.stepSize });
+  };
+
+  decrementRemainingTime = () => {
+    this.setState({
+      remaining: (this.state.remaining - this.stepSize) || 1
+    });
+  };
+
   render() {
     const { remaining, running } = this.state;
 
     return (
       <div className={styles.container}>
-        <p className={styles.timerText}>
-          { remaining }  sec.
-        </p>
+        <div className={styles.timerText}>
+          <div onMouseDown={this.decrementRemainingTime} className={styles.timerButton}>-</div>
+          <div>{ remaining }  sec.</div>
+          <div onMouseDown={this.incrementRemainingTime} className={styles.timerButton}>+</div>
+        </div>
         <div>
           <button className={styles.button} onClick={this.handleReset}>
             Reset
