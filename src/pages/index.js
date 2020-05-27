@@ -13,6 +13,8 @@ import {
   saveUserPreferences,
   getUserPreferences
 } from '../utils/persistence';
+import CustomTeaSessionModal from '../components/CustomTeaSessionModal';
+
 
 import styles from './index.module.css';
 
@@ -53,6 +55,14 @@ class IndexPage extends React.Component {
     return found ? found : DEFAULT_TEA_SESSION;
   }
 
+  handleAddCustomSession = () => {
+    this.setState({ modalOpen: true });
+  }
+
+  handleCloseCustomSessionModal = () => {
+    this.setState({ modalOpen: false });
+  }
+
   get teas() {
     return [
       ...SUGGESTED_TIMES,
@@ -81,6 +91,19 @@ class IndexPage extends React.Component {
     });
   }
 
+  addCustomTeaSession = async (teaSession, persist) => {
+    console.log('addCustomTeaSession:', teaSession);
+    if (persist) {
+      const updatedTeaSessions = await saveTeaSessions([
+        ...this.state.userTeaSessions,
+        teaSession
+      ]);
+      this.setState({ userTeaSessions: updatedTeaSessions });
+    }
+    this.setState({
+      selectedTea: teaSession
+    })
+  }
   render() {
     return (
       <Layout>
@@ -96,6 +119,7 @@ class IndexPage extends React.Component {
                     ))
                   }
                 </select>
+                <button className={styles.button} onClick={this.handleAddCustomSession} title="Add a custom tea session">+</button>
               </div>
               <div className={styles.switchContainer}>
                 Gong Fu &nbsp;<Switch onChange={this.handleBrewMethodSelect} value={this.state.userPreferences.westernMethod} /> &nbsp;  Western
@@ -118,6 +142,18 @@ class IndexPage extends React.Component {
                 Bug reports, feature requests should all go <a className={styles.link} rel="noreferrer" href="https://www.github.com/canibanoglu/teacompanion" target="_blank">here</a>
               </p>
             </div>
+
+            { this.state.modalOpen && (
+              <CustomTeaSessionModal
+                isOpen={this.state.modalOpen}
+                onSave={this.addCustomTeaSession}
+                onClose={this.handleCloseCustomSessionModal}
+                contentLabel="Add a custom tea session"
+                className="test"
+              >
+                Add a fasdfasdf
+              </CustomTeaSessionModal>
+            )}
 
           </Page>
       </Layout>

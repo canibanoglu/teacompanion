@@ -52,10 +52,30 @@
     border-bottom: 1px dotted rgb(166, 172, 205);
     color: rgb(166, 172, 205);
     padding: 0.5rem;
+    width: 9rem;
 
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .splitInputContainer {
+    input {
+      width: 4rem;
+
+      &:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .switchContainer {
+    display: inline-flex;
+    align-items: center;
+
+    label {
+      margin-right: 0.5rem;
     }
   }
 }

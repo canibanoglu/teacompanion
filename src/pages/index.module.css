@@ -33,9 +33,21 @@
   font-size: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  margin-right: 1rem;
 }
 
 .switchContainer {
   display: flex;
   align-items: center;
+}
+
+.button {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(166, 172, 205);
+  margin-right: 1rem;
 }
