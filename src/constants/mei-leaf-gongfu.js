@@ -109,6 +109,17 @@ const values = [
     infusions: [5, 7, 9, 11, 13, 15, 20],
     defaultTimeIncrement: 0,
     notes: '',
+  },
+  {
+    name: 'Bai Mudan 2007',
+    waterTemp: 90,
+    amount: '2',
+    amountWestern: '1.2',
+    infusions: [30, 30, 45, 60],
+    inusiontsWestern: [240, 300],
+    defaultTimeIncrement: 15,
+    defaultTimeIncrementWestern: 60,
+    notes: '',
   }
 ];
 
