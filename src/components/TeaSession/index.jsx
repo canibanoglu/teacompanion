@@ -47,6 +47,7 @@ export default class TeaSession extends React.Component {
   render() {
     const { completedInfusions } = this.state;
     const {
+      id,
       infusions,
       infusionsWestern,
       notes,
@@ -77,6 +78,7 @@ export default class TeaSession extends React.Component {
         <p className={styles.text}>{name}</p>
         <p className={styles.text}>Water Temperature: {waterTemp} °C</p>
         <p className={styles.text}>Amount: {amountValue} gr / 100 ml</p>
+        { id && <p className={styles.editLink} onClick={this.props.onEditClick}>Edit</p> }
         <h3 className={styles.header}>Infusion Counter</h3>
         <div className={styles.infusions}>
           {

@@ -12,7 +12,7 @@ export default class CustomTeaSessionModal extends React.Component {
     infusions: this.props.infusions || [],
     infusionsWestern: this.props.infusionsWestern || [],
     infusionsText: this.props.infusions ? this.props.infusions.join(' ') : '',
-    infusionsWesternText: this.props.infusionsWestern ? this.props.infusions.join(' ') : '',
+    infusionsWesternText: this.props.infusionsWestern ? this.props.infusionsWestern.join(' ') : '',
     defaultTimeIncrement: this.props.defaultTimeIncrement || 0,
     defaultTimeIncrementWestern: this.props.defaultTimeIncrementWestern || 0,
     persist: this.props.editing || false,
@@ -33,6 +33,7 @@ export default class CustomTeaSessionModal extends React.Component {
       }
     }
     onSave({
+      id: this.props.id,
       name: this.state.name,
       waterTemp: this.state.waterTemp,
       amount: this.state.amount,

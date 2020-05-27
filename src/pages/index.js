@@ -37,7 +37,8 @@ class IndexPage extends React.Component {
     userTeaSessions: [],
     userPreferences: {
       westernMethod: false,
-    }
+    },
+    canMode: false,
   };
 
   async componentDidMount() {
@@ -55,18 +56,30 @@ class IndexPage extends React.Component {
     return found ? found : DEFAULT_TEA_SESSION;
   }
 
+  findTeaById = id => {
+    return this.state.userTeaSessions.find(x => x.id === id);
+  }
+
   handleAddCustomSession = () => {
     this.setState({ modalOpen: true });
   }
 
   handleCloseCustomSessionModal = () => {
-    this.setState({ modalOpen: false });
+    this.setState({ modalOpen: false, editing: false });
+  }
+
+  handleEditClick = () => {
+    this.setState({
+      editing: true
+    }, () => {
+      this.handleAddCustomSession();
+    })
   }
 
   get teas() {
     return [
       ...SUGGESTED_TIMES,
-      ...NANNUOSHAN_TIMES,
+      ...(this.canMode ? NANNUOSHAN_TIMES : []),
       ...(this.state ? this.state.userTeaSessions : [])
     ];
   }
@@ -91,14 +104,38 @@ class IndexPage extends React.Component {
     });
   }
 
+  // Rename/refactor
   addCustomTeaSession = async (teaSession, persist) => {
-    console.log('addCustomTeaSession:', teaSession);
     if (persist) {
-      const updatedTeaSessions = await saveTeaSessions([
-        ...this.state.userTeaSessions,
-        teaSession
-      ]);
-      this.setState({ userTeaSessions: updatedTeaSessions });
+      let updatedTeaSessions;
+      const newId = Date.now();
+
+      if (teaSession.id) {
+        const index = this.state.userTeaSessions.findIndex(x => x.id === teaSession.id);
+        updatedTeaSessions = [
+          ...this.state.userTeaSessions.slice(0, index),
+          teaSession,
+          ...this.state.userTeaSessions.slice(index + 1)
+        ];
+      } else {
+        updatedTeaSessions = [
+          ...this.state.userTeaSessions,
+          {
+            ...teaSession,
+            id: newId
+          }
+        ];
+      }
+
+      await saveTeaSessions(updatedTeaSessions);
+      this.setState({
+        userTeaSessions: updatedTeaSessions,
+        selectedTea: teaSession.id ? teaSession : {
+          ...teaSession,
+          id: newId
+        }
+      });
+      return;
     }
     this.setState({
       selectedTea: teaSession
@@ -127,6 +164,7 @@ class IndexPage extends React.Component {
             </div>
 
             <TeaSession
+              onEditClick={this.handleEditClick}
               westernMethod={this.state.userPreferences.westernMethod}
               {...this.state.selectedTea}
             />
@@ -150,9 +188,9 @@ class IndexPage extends React.Component {
                 onClose={this.handleCloseCustomSessionModal}
                 contentLabel="Add a custom tea session"
                 className="test"
-              >
-                Add a fasdfasdf
-              </CustomTeaSessionModal>
+                editing={this.state.editing}
+                {...(this.state.editing ? this.state.selectedTea: {})}
+              />
             )}
 
           </Page>
