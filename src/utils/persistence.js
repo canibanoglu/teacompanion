@@ -1,4 +1,4 @@
-import localForage from 'localForage';
+import localForage from 'localforage/dist/localforage';
 
 localForage.config({
   name: "Can's Tea Companion",
