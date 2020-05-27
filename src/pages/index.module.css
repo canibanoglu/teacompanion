@@ -31,9 +31,11 @@
   -webkit-appearance: none;
   color: rgb(166, 172, 205);
   font-size: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   margin-right: 1rem;
+  height: 1.5rem;
+  border-radius: 0;
 }
 
 .switchContainer {
