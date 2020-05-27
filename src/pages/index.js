@@ -4,7 +4,8 @@ import Layout from '../components/Layout/Layout';
 import SEO from '../components/Seo/SEO';
 import Page from '../components/Page/Page';
 import TeaSession from '../components/TeaSession';
-import SUGGESTED_TIMES from '../constants/mei-leaf-suggested-infusion-times';
+import SUGGESTED_TIMES from '../constants/mei-leaf-suggested-times';
+import NANNUOSHAN_TIMES from '../constants/nannuoshan';
 import Switch from '../components/Switch';
 
 import styles from './index.module.css';
@@ -13,11 +14,14 @@ import styles from './index.module.css';
 class IndexPage extends React.Component {
   state = {
     western: false,
-    selectedTea: SUGGESTED_TIMES.GONG_FU[0],
+    selectedTea: this.teas[0]
   };
 
   get teas() {
-    return this.state.western ? SUGGESTED_TIMES.WESTERN : SUGGESTED_TIMES.GONG_FU;
+    return [
+      ...SUGGESTED_TIMES,
+      ...NANNUOSHAN_TIMES,
+    ];
   }
 
   handleTeaSelect = e => {
@@ -58,6 +62,7 @@ class IndexPage extends React.Component {
             </div>
 
             <TeaSession
+              westernMethod={this.state.western}
               {...this.state.selectedTea}
             />
 

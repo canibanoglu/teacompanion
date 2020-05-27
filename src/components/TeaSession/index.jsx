@@ -48,17 +48,25 @@ export default class TeaSession extends React.Component {
     const { completedInfusions } = this.state;
     const {
       infusions,
+      infusionsWestern,
       notes,
       defaultTimeIncrement,
+      defaultTimeIncrementWestern,
       amount,
+      amountWestern,
       waterTemp,
-      name
+      name,
+      westernMethod
     } = this.props;
 
     const currentInfusion = completedInfusions.length;
-    const infusionTime = currentInfusion < infusions.length ?
-      infusions[currentInfusion] :
-      last(infusions) + (currentInfusion - infusions.length + 1) * defaultTimeIncrement;
+    const infusionsArray = westernMethod ? infusionsWestern : infusions;
+    const defaultTimeIncrementValue = westernMethod ? defaultTimeIncrementWestern : defaultTimeIncrement;
+    const amountValue = westernMethod ? amountWestern : amount;
+
+    const infusionTime = currentInfusion < infusionsArray.length ?
+      infusionsArray[currentInfusion] :
+      last(infusionsArray) + (currentInfusion - infusionsArray.length + 1) * defaultTimeIncrementValue;
 
     return (
       <div className={styles.container}>
@@ -68,11 +76,11 @@ export default class TeaSession extends React.Component {
         />
         <p className={styles.text}>{name}</p>
         <p className={styles.text}>Water Temperature: {waterTemp} °C</p>
-        <p className={styles.text}>Amount: {amount} gr / 100 ml</p>
+        <p className={styles.text}>Amount: {amountValue} gr / 100 ml</p>
         <h3 className={styles.header}>Infusion Counter</h3>
         <div className={styles.infusions}>
           {
-            infusions.map((time, index) => (
+            infusionsArray.map((time, index) => (
               <InfusionBox
                 key={index}
                 time={index < currentInfusion ? completedInfusions[index] : time}
@@ -82,14 +90,14 @@ export default class TeaSession extends React.Component {
             ))
           }
           {
-            currentInfusion >= infusions.length && (
-              (new Array(currentInfusion - infusions.length + 1).fill(0)).map((_, i) => (
+            currentInfusion >= infusionsArray.length && (
+              (new Array(currentInfusion - infusionsArray.length + 1).fill(0)).map((_, i) => (
                 <InfusionBox
-                  key={infusions.length + i}
-                  time={last(infusions) + (i + 1) * defaultTimeIncrement}
-                  index={infusions.length + i}
+                  key={infusionsArray.length + i}
+                  time={last(infusionsArray) + (i + 1) * defaultTimeIncrementValue}
+                  index={infusionsArray.length + i}
                   extra
-                  done={i + infusions.length !== currentInfusion}
+                  done={i + infusionsArray.length !== currentInfusion}
                 />
               ))
 

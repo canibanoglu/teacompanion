@@ -1,0 +1,62 @@
+export default [
+  // Extras here for now move them away
+  {
+    name: 'Yiwu 2014 (Gushu)',
+    waterTemp: 100,
+    amount: '5',
+    amountWestern: '1.2',
+    infusions: [
+      2, 3, 4, 5, 6,
+      7, 8, 9, 10, 11,
+      12, 13, 14, 15, 15
+    ],
+    infusionsWestern: [240, 240, 240, 240, 240, 240],
+    defaultTimeIncrement: 0,
+    defaultTimeIncrementWestern: 0,
+    notes: '',
+  },
+  {
+    name: 'Bai Hao Yin Zhen 2017 (Superior)',
+    waterTemp: 90,
+    amount: '3',
+    amountWestern: '1.2',
+    infusions: [45, 45, 60, 90],
+    infusionsWestern: [240, 300],
+    defaultTimeIncrement: 30,
+    defaultTimeIncrementWestern: 60,
+    notes: '',
+  },
+  {
+    name: 'Xingren Xiang',
+    waterTemp: 90,
+    amount: '3',
+    amountWestern: '1.2',
+    infusions: [45, 60, 60, 90],
+    infusionsWestern: [300, 360],
+    defaultTimeIncrement: 30,
+    defaultTimeIncrementWestern: 60,
+    notes: '',
+  },
+  {
+    name: 'Nannuoshan 2013 - Gushu - Mao Cha',
+    waterTemp: 100,
+    amount: '4-5',
+    amountWestern: '1.2',
+    infusions: [5, 7, 9, 11, 13, 15, 20],
+    infusionsWestern: [300, 360, 420],
+    defaultTimeIncrement: 0,
+    defaultTimeIncrementWestern: 0,
+    notes: '',
+  },
+  {
+    name: 'Bai Mudan 2007',
+    waterTemp: 90,
+    amount: '2',
+    amountWestern: '1.2',
+    infusions: [30, 30, 45, 60],
+    infusionsWestern: [240, 300],
+    defaultTimeIncrement: 15,
+    defaultTimeIncrementWestern: 60,
+    notes: '',
+  }
+]
