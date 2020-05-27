@@ -7,37 +7,78 @@ import TeaSession from '../components/TeaSession';
 import SUGGESTED_TIMES from '../constants/mei-leaf-suggested-times';
 import NANNUOSHAN_TIMES from '../constants/nannuoshan';
 import Switch from '../components/Switch';
+import {
+  saveTeaSessions,
+  getTeaSessions,
+  saveUserPreferences,
+  getUserPreferences
+} from '../utils/persistence';
 
 import styles from './index.module.css';
+
+const DEFAULT_TEA_SESSION = {
+  name: '',
+  amount: '',
+  amountWestern: '',
+  waterTemp: 70,
+  infusions: [1],
+  infusionsWestern: [1],
+  defaultTimeIncrement: 0,
+  defaultTimeIncrementWestern: 0,
+  notes: ''
+};
 
 
 class IndexPage extends React.Component {
   state = {
-    western: false,
-    selectedTea: this.teas[0]
+    selectedTea: this.teas[0],
+    userTeaSessions: [],
+    userPreferences: {
+      westernMethod: false,
+    }
   };
+
+  async componentDidMount() {
+    const userTeaSessions = await getTeaSessions();
+    const userPreferences = await getUserPreferences();
+    this.setState({
+      userTeaSessions,
+      userPreferences,
+    });
+  }
+
+  findTeaByName = name => {
+    const found = this.teas.find(x => x.name === name);
+
+    return found ? found : DEFAULT_TEA_SESSION;
+  }
 
   get teas() {
     return [
       ...SUGGESTED_TIMES,
       ...NANNUOSHAN_TIMES,
+      ...(this.state ? this.state.userTeaSessions : [])
     ];
   }
 
   handleTeaSelect = e => {
     this.setState({
-      selectedTea: this.teas.find(x => x.name === e.target.value)
+      selectedTea: this.findTeaByName(e.target.value)
     })
   }
 
-  handleBrewMethodSelect = e => {
+  handleBrewMethodSelect = async e => {
+    const updatedPreferences = await saveUserPreferences(Object.assign(
+      {},
+      this.state.userPreferences,
+      {
+        westernMethod: e.target.checked
+      },
+    ));
+
     this.setState({
-      western: e.target.checked
-    }, () => {
-      this.setState({
-        selectedTea: this.teas.find(x => x.name === this.state.selectedTea.name)
-      })
-    })
+      userPreferences: updatedPreferences
+    });
   }
 
   render() {
@@ -57,12 +98,12 @@ class IndexPage extends React.Component {
                 </select>
               </div>
               <div className={styles.switchContainer}>
-                Gong Fu &nbsp;<Switch onChange={this.handleBrewMethodSelect} value={this.state.western} /> &nbsp;  Western
+                Gong Fu &nbsp;<Switch onChange={this.handleBrewMethodSelect} value={this.state.userPreferences.westernMethod} /> &nbsp;  Western
               </div>
             </div>
 
             <TeaSession
-              westernMethod={this.state.western}
+              westernMethod={this.state.userPreferences.westernMethod}
               {...this.state.selectedTea}
             />
 
@@ -71,7 +112,7 @@ class IndexPage extends React.Component {
                 Original content can be found <a className={styles.link} rel="noreferrer" href="https://meileaf.com/resources/pdf/mei-leaf-tea-brewing-guide.pdf" target="_blank">here</a>
               </p>
               <p>
-                Made with {'<3'} and tea by <a className={styles.link} rel="noreferrer" href="https://can.ibanog.lu" target="_blank">me</a>. 
+                Made with {'<3'} and tea by <a className={styles.link} rel="noreferrer" href="https://can.ibanog.lu" target="_blank">me</a>.
               </p>
               <p>
                 Bug reports, feature requests should all go <a className={styles.link} rel="noreferrer" href="https://www.github.com/canibanoglu/teacompanion" target="_blank">here</a>
