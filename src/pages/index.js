@@ -141,6 +141,15 @@ class IndexPage extends React.Component {
       selectedTea: teaSession
     })
   }
+
+  removeCustomTeaSession = async (id) => {
+    const filtered = await saveTeaSessions(this.state.userTeaSessions.filter(x => x.id !== id))
+    this.setState({
+      userTeaSessions: filtered,
+      selectedTea: this.teas[0]
+    })
+  }
+
   render() {
     return (
       <Layout>
@@ -185,6 +194,7 @@ class IndexPage extends React.Component {
               <CustomTeaSessionModal
                 isOpen={this.state.modalOpen}
                 onSave={this.addCustomTeaSession}
+                onDelete={this.removeCustomTeaSession}
                 onClose={this.handleCloseCustomSessionModal}
                 contentLabel="Add a custom tea session"
                 className="test"

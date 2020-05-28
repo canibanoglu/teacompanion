@@ -18,6 +18,11 @@ export default class CustomTeaSessionModal extends React.Component {
     persist: this.props.editing || false,
   }
 
+  handleDeleteClick = async () => {
+    await this.props.onDelete(this.props.id);
+    this.props.onClose();
+  };
+
   handleSaveClick = () => {
     const { onSave, onClose } = this.props;
 
@@ -242,6 +247,7 @@ export default class CustomTeaSessionModal extends React.Component {
 
         <div className={styles.footer}>
           <button className={styles.button} onClick={onClose}>Cancel</button>
+          { this.props.editing && <button className={styles.button} onClick={this.handleDeleteClick}>Delete</button> }
           <button className={styles.button} onClick={this.handleSaveClick}>
             { this.props.editing ? 'Save' : 'Create' }
           </button>
