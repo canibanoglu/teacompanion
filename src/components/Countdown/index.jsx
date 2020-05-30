@@ -1,4 +1,5 @@
 import React from 'react';
+import NoSleep from 'nosleep.js';
 import styles from './index.module.css';
 
 
@@ -12,6 +13,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
     this.audio = React.createRef();
+    this.sleepLock = new NoSleep();
   }
 
   componentDidUpdate(prevProps) {
@@ -47,12 +49,14 @@ export default class Countdown extends React.Component {
   stop = (cb = () => {}) => {
     clearTimeout(this.timerId);
     this.timerId = null;
+    this.sleepLock.disable();
     this.setState({
       running: false,
     }, cb)
   }
 
   start = () => {
+    this.sleepLock.enable();
     this.setState({
       running: true,
       startTime: Date.now()
