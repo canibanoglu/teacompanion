@@ -11,10 +11,10 @@ module.exports = {
                 name: 'Can\'s Tea Companion',
                 short_name: 'Can\'s Tea Companion',
                 start_url: '/',
-                background_color: '#ffffff',
-                theme_color: '#744C9E',
+                background_color: '#292D3E',
+                theme_color: '#A6ACCD',
                 display: 'standalone',
-                icon: 'src/assets/logos/icon.png',
+                icon: 'src/assets/logos/icon.svg',
             },
         }, {
             resolve: 'gatsby-source-filesystem',
